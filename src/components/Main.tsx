@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../styles/main.css'
 import AIRecipe from './AIRecipe';
 import IngredientsList from './IngredientsList';
@@ -7,6 +7,14 @@ import { getRecipeFromMistral } from '../../ai';
 export default function Main() {
     const [ingredients, setIngredients] = useState<string[]>(["Bread", "Tomatoe", "Cabbage", "chicken", "Beans", "Carrot", "Chilli Sauce"]);
     const [recipe, setRecipe] = useState<string>();
+    const recipeSection = useRef(null);
+
+    useEffect(() => {
+        if (recipe?.length !== 0 && recipeSection.current !== null) {
+            //@ts-ignore
+            recipeSection.current.scrollIntoView({behaviour: "smooth"});
+        }
+    },[recipe])
 
     function addIngredient(formData: FormData) {
         const newIngredient = formData.get("ingredient")?.toString();
@@ -35,6 +43,7 @@ export default function Main() {
                 {
                     ingredients.length > 0 && 
                     <IngredientsList
+                        ref = {recipeSection}
                         ingredients = {ingredients} 
                         getRecipe = {getRecipe}
                     />

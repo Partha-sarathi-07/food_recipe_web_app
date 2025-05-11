@@ -1,13 +1,12 @@
 import Markdown from "react-markdown";
 // @ts-ignore
 export default function AIRecipe({ recipe }) {
-    const markdown = recipe;
     return (
         <section id='show_recipe_container'>
             <h2 className='section_heading'>Chef AI Recommends:</h2>
             <article id="suggested_recipe_container" aria-live="polite">
                 <Markdown>
-                    {markdown}
+                    {recipe}
                 </Markdown>
                 {/* <p>Based on the ingredients you have available, I would recommend making a simple a delicious <strong>Beef Bolognese Pasta</strong>. Here is the recipe:</p>
                 <h3>Beef Bolognese Pasta</h3>
